@@ -1,13 +1,27 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Oswald', sans-serif;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.toggleBar {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.dashboard {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.orBadge {
+  background-color: #c21858;
+  color: white;
+  padding: 1.8rem;
+  border-radius: 50%;
+  z-index: 5000;
+  margin: .5rem;
+  font-size: 1.8rem;
+  box-shadow: 3px 4px 8px rgba(20,20,20, 0.4), 5px 8px 10px rgba(20,20,20, 0.2);
 }
