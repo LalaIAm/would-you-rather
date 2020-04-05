@@ -1,6 +1,6 @@
 import {
   GET_USERS,
-  ADD_USER_ANSWERS,
+  ADD_USER_ANSWER,
   ADD_USER_QUESTION,
 } from "../actions/users";
 
@@ -11,26 +11,25 @@ export default function users(state = {}, action) {
         ...state,
         ...action.users,
       };
-    case ADD_USER_ANSWERS:
-      const { authUser, qid, answer } = action;
-
+    case ADD_USER_ANSWER:
+      const { authedUser, qid, answer } = action;
       return {
         ...state,
-        [authUser]: {
-          ...state[authUser],
+        [authedUser]: {
+          ...state[authedUser],
           answers: {
-            ...state[authUser].answers,
+            ...state[authedUser].answers,
             [qid]: answer,
           },
         },
       };
     case ADD_USER_QUESTION:
-      const { id, author } = action;
+      const { question } = action;
       return {
         ...state,
-        [author]: {
-          ...state[author],
-          questions: state[author].questions.concat(id),
+        [question.author]: {
+          ...state[question.author],
+          questions: state[action.author].questions.concat([question.id]),
         },
       };
     default:

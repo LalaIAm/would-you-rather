@@ -25,3 +25,10 @@ body {
   font-size: 1.8rem;
   box-shadow: 3px 4px 8px rgba(20,20,20, 0.4), 5px 8px 10px rgba(20,20,20, 0.2);
 }
+
+.submit-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1.5rem;
+}

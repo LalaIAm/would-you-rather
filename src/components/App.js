@@ -14,7 +14,7 @@ class App extends Component {
   }
 
   render() {
-    const { authUser } = this.props;
+    const { authedUser } = this.props;
     return (
       <ThemeProvider theme={theme}>
         <Router>
@@ -30,9 +30,9 @@ class App extends Component {
   }
 }
 
-function mapStateToProps({ authUser }) {
+function mapStateToProps({ authedUser }) {
   return {
-    authUser,
+    authedUser,
   };
 }
 export default connect(mapStateToProps, { handleInitialData })(App);

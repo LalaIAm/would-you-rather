@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+
 import {
   Card,
   Typography,
@@ -8,9 +9,11 @@ import {
   Fab,
   CardActions,
   IconButton,
+  Button,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
+import { handleAnswer } from "../actions/shared";
 import StarsTwoToneIcon from "@material-ui/icons/StarsTwoTone";
 import CheckCircleTwoToneIcon from "@material-ui/icons/CheckCircleTwoTone";
 
@@ -20,30 +23,54 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2),
   },
   actions: {
-    textAlign: 'center',
-    margin: 'auto',
+    textAlign: "center",
+    margin: "auto",
   },
   questionCard: {
     background: "#b6dbf2",
-    justifyContent: 'center',
-    alignItems: 'center',
-    display: 'flex',
-    flexDirection: 'column'
+    justifyContent: "center",
+    alignItems: "center",
+    display: "flex",
+    flexDirection: "column",
+  },
+  selected: {
+    color: "secondary",
   },
 }));
 
 const QuestionContainer = (props) => {
   const classes = useStyles();
+  const [selection, setSelection] = useState("");
+  const [colorOne, setColorOne] = useState("primary");
+  const [colorTwo, setColorTwo] = useState("primary");
 
-  const { question, authUser } = props;
+  const toggleSelection = (option) => {
+    setSelection(option);
+    if (option === "optionOne") {
+      setColorOne("secondary");
+      setColorTwo("primary");
+    } else {
+      setColorOne("primary");
+      setColorTwo("secondary");
+    }
+  };
+
+  const { id, question, authedUser, dispatch } = props;
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const answer = selection;
+    dispatch(handleAnswer(id, answer))
+    
+  };
 
   if (question === null) {
     return <p>This question does not exist</p>;
   }
 
   if (
-    question.optionOne.votes.includes(authUser) ||
-    question.optionTwo.votes.includes(authUser)
+    question.optionOne.votes.includes(authedUser) ||
+    question.optionTwo.votes.includes(authedUser)
   ) {
     return null;
   }
@@ -56,48 +83,73 @@ const QuestionContainer = (props) => {
       <Typography align='center' variant='h3'>
         Would you rather:
       </Typography>
+
       <div className={classes.innerContainer}>
-        <Grid alignItems='center' justify='center' container>
-          <Grid item>
-            <Card className={classes.questionCard}>
-              <CardContent>
-                <Typography variant='h4'>{question.optionOne.text}</Typography>
-              </CardContent>
-              <CardActions>
-                <Fab size='small' color='primary'>
-                  <CheckCircleTwoToneIcon />
-                </Fab>
-              </CardActions>
-            </Card>
+        <form onSubmit={handleSubmit}>
+          <Grid alignItems='center' justify='center' container>
+            <Grid item>
+              <Card className={classes.questionCard}>
+                <CardContent>
+                  <Typography variant='h4'>
+                    {question.optionOne.text}
+                  </Typography>
+                </CardContent>
+                <CardActions>
+                  <Fab
+                    value='optionOne'
+                    onClick={() => toggleSelection("optionOne")}
+                    size='small'
+                    color={colorOne}
+                  >
+                    <CheckCircleTwoToneIcon />
+                  </Fab>
+                </CardActions>
+              </Card>
+            </Grid>
+            <Grid item>
+              <div className='orBadge'>OR</div>
+            </Grid>
+            <Grid item>
+              <Card className={classes.questionCard}>
+                <CardContent>
+                  <Typography variant='h4'>
+                    {question.optionTwo.text}
+                  </Typography>
+                </CardContent>
+                <CardActions className={classes.actions}>
+                  <Fab
+                    value='optionTwo'
+                    onClick={() => toggleSelection("optionTwo")}
+                    size='small'
+                    color={colorTwo}
+                  >
+                    <CheckCircleTwoToneIcon />
+                  </Fab>
+                </CardActions>
+              </Card>
+            </Grid>
           </Grid>
-          <Grid item>
-            <div className='orBadge'>OR</div>
-          </Grid>
-          <Grid item>
-            <Card className={classes.questionCard}>
-              <CardContent>
-                <Typography variant='h4'>{question.optionTwo.text}</Typography>
-              </CardContent>
-              <CardActions className={classes.actions}>
-                <Fab size='small' color='primary'>
-                  <CheckCircleTwoToneIcon />
-                </Fab>
-              </CardActions>
-            </Card>
-          </Grid>
-        </Grid>
+          <div className='submit-container'>
+            <Button onClick={handleSubmit} variant='contained' color='primary'>
+              Choose
+            </Button>
+          </div>
+        </form>
       </div>
     </Paper>
   );
 };
 
-function mapStateToProps({ authUser, users, questions }, { id }) {
+function mapStateToProps({ authedUser, users, questions }, { id }) {
   const question = questions[id];
 
   return {
-    authUser,
+    authedUser,
     question,
+    id
   };
 }
+
+
 
 export default connect(mapStateToProps)(QuestionContainer);
