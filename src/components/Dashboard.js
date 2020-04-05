@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { Grid, Switch, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import QuestionContainer from "./QuestionContainer";
+import QuestionPage from "./QuestionPage";
 import { connect } from "react-redux";
+import QuestionLink from './QuestionLink';
+import ResultsCard from './ResultsCard';
 
 const useStyles = makeStyles((theme) => ({
   toggleBar: {
@@ -41,16 +43,17 @@ const Dashboard = (props) => {
         </Grid>
       </div>
       <div className={classes.body}>
-        {questionsSet && (
+        {/*questionsSet && (*/}
           <ul className='dashboard-list'>
-            {props.questionIds.map((id) => (
-              <li key={id}>
-                <QuestionContainer id={id} />
-              </li>
-            ))}
+          {props.questionIds.map((id) => (
+            <li key={id}>
+              <QuestionLink id={id} />
+            </li>
+          ))}
           </ul>
-        )}
+            {/*})*/}
       </div>
+      <ResultsCard />
     </div>
   );
 };

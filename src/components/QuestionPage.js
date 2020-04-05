@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { useParams } from "react-router";
 import {
   Card,
   Typography,
@@ -16,6 +16,8 @@ import { connect } from "react-redux";
 import { handleAnswer } from "../actions/shared";
 import StarsTwoToneIcon from "@material-ui/icons/StarsTwoTone";
 import CheckCircleTwoToneIcon from "@material-ui/icons/CheckCircleTwoTone";
+import ResultsCard from "./ResultsCard";
+import QuestionLink from "./QuestionLink";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -38,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const QuestionContainer = (props) => {
+const QuestionPage = (props) => {
   const classes = useStyles();
   const [selection, setSelection] = useState("");
   const [colorOne, setColorOne] = useState("primary");
@@ -55,13 +57,12 @@ const QuestionContainer = (props) => {
     }
   };
 
-  const { id, question, authedUser, dispatch } = props;
+  const { question, author, authedUser, dispatch, id } = props;
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const answer = selection;
-    dispatch(handleAnswer(id, answer))
-    
+    dispatch(handleAnswer(id, answer));
   };
 
   if (question === null) {
@@ -72,13 +73,13 @@ const QuestionContainer = (props) => {
     question.optionOne.votes.includes(authedUser) ||
     question.optionTwo.votes.includes(authedUser)
   ) {
-    return null;
+    return <ResultsCard id={id} key={id} />
   }
 
   return (
     <Paper className={classes.container}>
       <Typography align='center' variant='body2'>
-        {question.author} asks
+        {author} asks
       </Typography>
       <Typography align='center' variant='h3'>
         Would you rather:
@@ -136,20 +137,29 @@ const QuestionContainer = (props) => {
           </div>
         </form>
       </div>
+      <QuestionLink id={id} />
     </Paper>
   );
 };
 
-function mapStateToProps({ authedUser, users, questions }, { id }) {
+function mapStateToProps({ authedUser, questions, users }, props) {
+  const { id } = props.match.params;
   const question = questions[id];
+  const userAnswers = users[authedUser].answers;
 
-  return {
-    authedUser,
-    question,
-    id
-  };
+  if (question) {
+    return {
+      id,
+      authedUser,
+      userAnswer: Object.keys(userAnswers),
+      question,
+      author: users[question.author],
+    };
+  } else {
+    return {
+      question: null,
+    };
+  }
 }
 
-
-
-export default connect(mapStateToProps)(QuestionContainer);
+export default connect(mapStateToProps)(QuestionPage);

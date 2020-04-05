@@ -7,7 +7,16 @@ import { createStore } from "redux";
 import middleware from "./middleware";
 import reducer from "./reducers";
 import { Provider } from "react-redux";
-import {composeWithDevTools} from 'redux-devtools-extension'
+import { composeWithDevTools } from 'redux-devtools-extension';
+import LogRocket from 'logrocket';
+import setupLogRocketReact from 'logrocket-react'
+
+LogRocket.init("tca6ez/would-you-rather");
+setupLogRocketReact(LogRocket)
+LogRocket.identify('LalaIAm', {
+  name: 'Lauren',
+  email: 'lthorud12@gmail.com'
+})
 
 const store = createStore(reducer, composeWithDevTools(middleware));
 
