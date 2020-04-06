@@ -1,4 +1,9 @@
-import { getInitialData, saveQuestionAnswer, saveQuestion } from "../utils/api";
+import {
+  getInitialData,
+  saveQuestionAnswer,
+  saveQuestion,
+  saveUser,
+} from "../utils/api";
 import { addUserAnswer, addUserQuestion, getUsers } from "./users";
 import { getQuestions, addQuestion, saveAnswer } from "./questions";
 import { setAuthUser } from "./authUser";
@@ -38,5 +43,19 @@ export function handleSaveQuestion(option1, option2) {
       dispatch(addQuestion(question));
       dispatch(addUserQuestion(question));
     });
+  };
+}
+
+export function handleNewUser(name, uid, image) {
+  return (dispatch) => {
+    return saveUser({
+      name,
+      uid,
+      avatarURL: image,
+    })
+      .then((user) => {
+        dispatch(setAuthUser(user));
+      })
+      .catch((err) => console.warn("Error creating user: ", err));
   };
 }

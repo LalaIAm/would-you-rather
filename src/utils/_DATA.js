@@ -1,12 +1,16 @@
-const sarah = require("../images/placeholderImgWoman.jpg");
-const tyler = require("../images/placeholderImgMan.jpg");
-const john = require("../images/placeholderImgStanding.jpg");
+const user3 = require("../images/user3.png");
+const user1 = require("../images/user1.png");
+const user2 = require("../images/user2.png");
+const user4 = require("../images/user4.png");
+const user5 = require("../images/user5.png");
+const user6 = require("../images/user6.png");
+
 
 let users = {
   sarahedo: {
     id: "sarahedo",
     name: "Sarah Edo",
-    avatarURL: sarah,
+    avatarURL: user3,
     answers: {
       "8xf0y6ziyjabvozdd253nd": "optionOne",
       "6ni6ok3ym7mf1p33lnez": "optionTwo",
@@ -18,7 +22,7 @@ let users = {
   tylermcginnis: {
     id: "tylermcginnis",
     name: "Tyler McGinnis",
-    avatarURL: tyler,
+    avatarURL: user2,
     answers: {
       vthrdm985a262al8qx3do: "optionOne",
       xj352vofupe1dqz9emx13r: "optionTwo",
@@ -28,7 +32,7 @@ let users = {
   johndoe: {
     id: "johndoe",
     name: "John Doe",
-    avatarURL: john,
+    avatarURL: user1,
     answers: {
       xj352vofupe1dqz9emx13r: "optionOne",
       vthrdm985a262al8qx3do: "optionTwo",
@@ -154,6 +158,16 @@ function formatQuestion({ optionOneText, optionTwoText, author }) {
   };
 }
 
+function formatUser({ name, uid, avatarURL }) {
+  return {
+    id: uid,
+    name: name,
+    avatarURL: avatarURL,
+    answers: {},
+    questions: [],
+  };
+}
+
 export function _saveQuestion(question) {
   return new Promise((res, rej) => {
     const authedUser = question.author;
@@ -174,6 +188,21 @@ export function _saveQuestion(question) {
       };
 
       res(formattedQuestion);
+    }, 1000);
+  });
+}
+
+export function _saveUser({ name, uid, avatarURL }) {
+  return new Promise((res, rej) => {
+    const formattedUser = formatUser(name, uid, avatarURL);
+
+    setTimeout(() => {
+      users = {
+        ...users,
+        [formattedUser.id]: formattedUser,
+      };
+
+      res(formattedUser);
     }, 1000);
   });
 }

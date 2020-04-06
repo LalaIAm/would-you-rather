@@ -2,6 +2,7 @@ import {
   GET_USERS,
   ADD_USER_ANSWER,
   ADD_USER_QUESTION,
+  ADD_USER
 } from "../actions/users";
 
 export default function users(state = {}, action) {
@@ -32,6 +33,14 @@ export default function users(state = {}, action) {
           questions: state[action.question.author].questions.concat([action.question.id]),
         },
       };
+    case ADD_USER:
+      const { username, uid, image } = action;
+      return {
+        ...state,
+        username,
+        uid,
+        image
+      }
     default:
       return state;
   }

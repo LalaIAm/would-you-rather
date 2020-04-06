@@ -5,6 +5,8 @@ import QuestionContainer from "./QuestionContainer";
 import { connect } from "react-redux";
 import QuestionLink from "./QuestionLink";
 
+import Login from './Login';
+
 const useStyles = makeStyles((theme) => ({
   toggleBar: {
     margin: "auto",
@@ -36,7 +38,7 @@ const Dashboard = (props) => {
 
   return (
     <div className='dashboard'>
-      {JSON.stringify(props.authProfile)}
+      
       <div className={classes.toggleBar}>
         <Grid component='label' container alignItems='center' spacing={1}>
           <Grid item>
@@ -55,6 +57,7 @@ const Dashboard = (props) => {
           </Grid>
         </Grid>
       </div>
+      <Login />
       <div className={classes.body}>
       
           <ul className='dashboard-list'>

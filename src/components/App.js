@@ -6,11 +6,11 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import { handleInitialData } from "../actions/shared";
 import Dashboard from "./Dashboard";
 import theme from "../utils/theme";
-import Header from './Header'
+import Header from "./Header";
 import QuestionContainer from "./QuestionContainer";
 import NewQuestion from "./NewQuestion";
 import LeaderBoard from "./LeaderBoard";
-import Profile from "./Profile";
+
 
 class App extends Component {
   componentDidMount() {
@@ -23,13 +23,12 @@ class App extends Component {
       <ThemeProvider theme={theme}>
         <Router>
           <div className='App'>
-            <Header />
+            <Header user={authedUser} />
             <Switch>
               <Route path='/' exact component={Dashboard} />
               <Route path='/question/:id' component={QuestionContainer} />
               <Route path='/add' component={NewQuestion} />
               <Route path='/leaderboard' component={LeaderBoard} />
-              <Route path='/profile'component={Profile} />
             </Switch>
           </div>
         </Router>
