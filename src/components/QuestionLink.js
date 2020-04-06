@@ -4,23 +4,27 @@ import { Card, CardContent, Typography, Avatar } from "@material-ui/core";
 import { connect } from "react-redux";
 
 const QuestionLink = (props) => {
-  const [answered, setAnswered] = useState();
-  const { id, authedUser, question, users, setQuestions } = props;
+  
+  const { id, answered, authedUser, question, users, questionsList } = props;
 
-  if (
-    question.optionOne.votes.includes(authedUser) ||
-    question.optionTwo.votes.includes(authedUser)
-  ) {
-    setAnswered(true);
+
+  if (questionsList === 'questions' && answered) {
+    return null;
+  } else if (questionsList === 'answers' && !answered) {
+    return null
   }
 
-  if (answered === "true" && setQuestions === "false") {
-    return <p>This is answered</p>;
-  }
+  
 
   return (
     <Link to={`/question/${id}`}>
       <Card>
+        {answered && (
+          <p>answered</p>
+        )}
+        {!answered && (
+          <p>No answe</p>
+        )}
         <CardContent>
           <Typography variant='h4'>{question.optionOne.text}</Typography>
         </CardContent>
@@ -29,15 +33,15 @@ const QuestionLink = (props) => {
   );
 };
 
-function mapStateToProps({ authedUser, users, questions }, { id }) {
+function mapStateToProps({ authedUser, users, questions }, { id, questionsList }) {
   const question = questions[id];
-  
+  const answered = question.optionOne.votes.includes(authedUser) || question.optionTwo.votes.includes(authedUser)
 
   return {
     question,
     id,
-    users,
-    
+    answered,
+    questionsList
   };
 }
 

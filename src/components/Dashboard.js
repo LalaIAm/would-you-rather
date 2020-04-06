@@ -24,11 +24,19 @@ const Dashboard = (props) => {
 
   const { questionIds, authedUser, questions } = props;
 
-  const renderQuestionList = () => {};
+  const renderList = () => {
+    if (questionsSet) {
+      return 'questions';
+    } else {
+      return 'answers'
+    }
+  }
+
+  
 
   return (
     <div className='dashboard'>
-      {typeof questionIds}
+      {JSON.stringify(props.authProfile)}
       <div className={classes.toggleBar}>
         <Grid component='label' container alignItems='center' spacing={1}>
           <Grid item>
@@ -37,7 +45,7 @@ const Dashboard = (props) => {
           <Grid item>
             <Switch
               checked={questionsSet}
-              onChange={handleQAchange}
+              onChange={() => handleQAchange()}
               name='questions'
               color='secondary'
             />
@@ -48,28 +56,30 @@ const Dashboard = (props) => {
         </Grid>
       </div>
       <div className={classes.body}>
-        {questionsSet && (
+      
           <ul className='dashboard-list'>
             {props.questionIds.map((id) => (
               <li key={id}>
-                <QuestionLink questions={questionsSet} id={id} />
+                <QuestionLink questionsList={renderList()} id={id} />
               </li>
             ))}
           </ul>
-        )}
+        
       </div>
     </div>
   );
 };
 
 function mapStateToProps({ questions, authedUser, users }) {
-  const authProfile = users[authedUser];
+  
+  
   return {
     questionIds: Object.keys(questions).sort(
       (a, b) => (questions[b].timestamp = questions[a].timestap)
     ),
     questions,
     authedUser,
+    
   };
 }
 
