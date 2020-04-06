@@ -78,8 +78,8 @@ const Nav = () => {
       <List>
         <ListItemLink to='/' primary='Would You Rather' />
         <ListItemLink to='/add' primary='Make New Poll' />
-        <ListItemLink to='/scoreboard' primary='Scoreboard' />
-        <ListItemLink to='/profile' primary='My Profile' />
+        <ListItemLink to='/leaderboard' primary='Leaderboard' />
+        <ListItemLink to='/profile' primary='My Stats' />
       </List>
     </div>
   );

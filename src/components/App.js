@@ -9,6 +9,8 @@ import theme from "../utils/theme";
 import Header from './Header'
 import QuestionContainer from "./QuestionContainer";
 import NewQuestion from "./NewQuestion";
+import LeaderBoard from "./LeaderBoard";
+import Profile from "./Profile";
 
 class App extends Component {
   componentDidMount() {
@@ -26,6 +28,8 @@ class App extends Component {
               <Route path='/' exact component={Dashboard} />
               <Route path='/question/:id' component={QuestionContainer} />
               <Route path='/add' component={NewQuestion} />
+              <Route path='/leaderboard' component={LeaderBoard} />
+              <Route path='/profile'component={Profile} />
             </Switch>
           </div>
         </Router>
