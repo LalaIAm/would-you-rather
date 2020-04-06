@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
   container: {
     padding: theme.spacing(3),
     marginTop: theme.spacing(2),
+    height: '80vh'
   },
   actions: {
     textAlign: "center",
@@ -72,11 +73,15 @@ const QuestionContainer = (props) => {
     return <p>This question does not exist</p>;
   }
 
+  const goHome = () => {
+    props.history.push('/')
+  }
+
   if (
     question.optionOne.votes.includes(authedUser) ||
     question.optionTwo.votes.includes(authedUser)
   ) {
-    return <ResultsCard id={id} />
+    return <ResultsCard authorProfile={authorProfile} id={id} />
   }
 
   return (
@@ -138,6 +143,9 @@ const QuestionContainer = (props) => {
           <div className='submit-container'>
             <Button onClick={handleSubmit} variant='contained' color='primary'>
               Choose
+            </Button>
+            <Button onClick={goHome} variant='contained' color='secondary'>
+              Back to List
             </Button>
           </div>
         </form>

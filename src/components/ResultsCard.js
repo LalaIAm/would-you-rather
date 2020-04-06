@@ -9,17 +9,20 @@ import {
   CardActions,
   IconButton,
   Button,
+  Avatar,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 import { handleAnswer } from "../actions/shared";
 import StarsTwoToneIcon from "@material-ui/icons/StarsTwoTone";
 import CheckCircleTwoToneIcon from "@material-ui/icons/CheckCircleTwoTone";
+import { Link as RouterLink } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   container: {
     padding: theme.spacing(3),
     marginTop: theme.spacing(2),
+    height: "80vh",
   },
   actions: {
     textAlign: "center",
@@ -39,12 +42,15 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "primary",
     borderRadius: "50%",
   },
+  avatar: {
+    margin: "auto",
+  },
 }));
 
 const ResultsCard = (props) => {
   const classes = useStyles();
 
-  const { id, question, authedUser, dispatch } = props;
+  const { id, question, authedUser, authorProfile, dispatch } = props;
 
   if (question === null) {
     return <p>This question does not exist</p>;
@@ -75,6 +81,11 @@ const ResultsCard = (props) => {
 
   return (
     <Paper className={classes.container}>
+      <Avatar
+        alt={authorProfile.name}
+        src={authorProfile.avatarURL}
+        className={classes.avatar}
+      />
       <Typography align='center' variant='body2'>
         {question.author} asks
       </Typography>
@@ -130,18 +141,32 @@ const ResultsCard = (props) => {
             </Card>
           </Grid>
         </Grid>
+        <div className='submit-container'>
+          <Button
+            variant='contained'
+            color='secondary'
+            component={RouterLink}
+            to='/'
+          >
+            Back to List
+          </Button>
+        </div>
       </div>
     </Paper>
   );
 };
 
-function mapStateToProps({ authedUser, users, questions }, { id }) {
+function mapStateToProps(
+  { authedUser, users, questions },
+  { id, authorProfile }
+) {
   const question = questions[id];
 
   return {
     authedUser,
     question,
     id,
+    authorProfile,
   };
 }
 
