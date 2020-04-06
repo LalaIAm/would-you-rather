@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import ResultsCard from './ResultsCard';
 import {
   Card,
   Typography,
@@ -10,6 +10,7 @@ import {
   CardActions,
   IconButton,
   Button,
+  Avatar
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
@@ -36,6 +37,9 @@ const useStyles = makeStyles((theme) => ({
   selected: {
     color: "secondary",
   },
+  avatar: {
+    margin: 'auto'
+  }
 }));
 
 const QuestionContainer = (props) => {
@@ -55,7 +59,7 @@ const QuestionContainer = (props) => {
     }
   };
 
-  const { id, question, authedUser, dispatch } = props;
+  const { id, question, authedUser, authorProfile, dispatch } = props;
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -72,13 +76,15 @@ const QuestionContainer = (props) => {
     question.optionOne.votes.includes(authedUser) ||
     question.optionTwo.votes.includes(authedUser)
   ) {
-    return null;
+    return <ResultsCard id={id} />
   }
 
   return (
+    
     <Paper className={classes.container}>
+      <Avatar alt={authorProfile.name} src={authorProfile.avatarURL} className={classes.avatar} />
       <Typography align='center' variant='body2'>
-        {question.author} asks
+        {authorProfile.name} asks
       </Typography>
       <Typography align='center' variant='h3'>
         Would you rather:
@@ -140,13 +146,16 @@ const QuestionContainer = (props) => {
   );
 };
 
-function mapStateToProps({ authedUser, users, questions }, { id }) {
+function mapStateToProps({ authedUser, users, questions }, { match }) {
+  const { id } = match.params;
   const question = questions[id];
+  const authorProfile = users[question.author]
 
   return {
     authedUser,
     question,
-    id
+    id, 
+    authorProfile
   };
 }
 

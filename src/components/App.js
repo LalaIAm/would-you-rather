@@ -7,6 +7,7 @@ import { handleInitialData } from "../actions/shared";
 import Dashboard from "./Dashboard";
 import theme from "../utils/theme";
 import Header from './Header'
+import QuestionContainer from "./QuestionContainer";
 
 class App extends Component {
   componentDidMount() {
@@ -22,6 +23,7 @@ class App extends Component {
             <Header />
             <Switch>
               <Route path='/' exact component={Dashboard} />
+              <Route path='/question/:id' component={QuestionContainer} />
             </Switch>
           </div>
         </Router>
