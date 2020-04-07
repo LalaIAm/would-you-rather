@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import ResultsCard from './ResultsCard';
 import {
   Card,
   Typography,
@@ -8,19 +8,19 @@ import {
   CardContent,
   Fab,
   CardActions,
-  IconButton,
   Button,
+  Avatar
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 import { handleAnswer } from "../actions/shared";
-import StarsTwoToneIcon from "@material-ui/icons/StarsTwoTone";
 import CheckCircleTwoToneIcon from "@material-ui/icons/CheckCircleTwoTone";
 
 const useStyles = makeStyles((theme) => ({
   container: {
     padding: theme.spacing(3),
     marginTop: theme.spacing(2),
+    height: '80vh'
   },
   actions: {
     textAlign: "center",
@@ -36,6 +36,9 @@ const useStyles = makeStyles((theme) => ({
   selected: {
     color: "secondary",
   },
+  avatar: {
+    margin: 'auto'
+  }
 }));
 
 const QuestionContainer = (props) => {
@@ -55,7 +58,7 @@ const QuestionContainer = (props) => {
     }
   };
 
-  const { id, question, authedUser, dispatch } = props;
+  const { id, question, authedUser, authorProfile, dispatch } = props;
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -68,17 +71,23 @@ const QuestionContainer = (props) => {
     return <p>This question does not exist</p>;
   }
 
+  const goHome = () => {
+    props.history.push('/')
+  }
+
   if (
     question.optionOne.votes.includes(authedUser) ||
     question.optionTwo.votes.includes(authedUser)
   ) {
-    return null;
+    return <ResultsCard authorProfile={authorProfile} id={id} />
   }
 
   return (
+    
     <Paper className={classes.container}>
+      <Avatar alt={authorProfile.name} src={authorProfile.avatarURL} className={classes.avatar} />
       <Typography align='center' variant='body2'>
-        {question.author} asks
+        {authorProfile.name} asks
       </Typography>
       <Typography align='center' variant='h3'>
         Would you rather:
@@ -133,6 +142,9 @@ const QuestionContainer = (props) => {
             <Button onClick={handleSubmit} variant='contained' color='primary'>
               Choose
             </Button>
+            <Button onClick={goHome} variant='contained' color='secondary'>
+              Back to List
+            </Button>
           </div>
         </form>
       </div>
@@ -140,13 +152,16 @@ const QuestionContainer = (props) => {
   );
 };
 
-function mapStateToProps({ authedUser, users, questions }, { id }) {
+function mapStateToProps({ authedUser, users, questions }, { match }) {
+  const { id } = match.params;
   const question = questions[id];
+  const authorProfile = users[question.author]
 
   return {
     authedUser,
     question,
-    id
+    id, 
+    authorProfile
   };
 }
 

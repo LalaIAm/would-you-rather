@@ -6,7 +6,13 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import { handleInitialData } from "../actions/shared";
 import Dashboard from "./Dashboard";
 import theme from "../utils/theme";
-import Header from './Header'
+import Header from "./Header";
+import QuestionContainer from "./QuestionContainer";
+import NewQuestion from "./NewQuestion";
+import LeaderBoard from "./LeaderBoard";
+import Login from './Login';
+import NotFound from "./404";
+
 
 class App extends Component {
   componentDidMount() {
@@ -14,14 +20,20 @@ class App extends Component {
   }
 
   render() {
-    const { authedUser } = this.props;
+    const { authedUser, userProfile } = this.props;
     return (
       <ThemeProvider theme={theme}>
         <Router>
+          <Header user={authedUser} profile={userProfile} />
           <div className='App'>
-            <Header />
             <Switch>
+              {!authedUser && <Route to='/login' component={Login} />}
+
               <Route path='/' exact component={Dashboard} />
+              <Route path='/question/:id' component={QuestionContainer} />
+              <Route path='/add' component={NewQuestion} />
+              <Route path='/leaderboard' component={LeaderBoard} />
+              <Route component={NotFound} />
             </Switch>
           </div>
         </Router>
@@ -30,9 +42,11 @@ class App extends Component {
   }
 }
 
-function mapStateToProps({ authedUser }) {
+function mapStateToProps({ authedUser, users }) {
+  const userProfile = users[authedUser]
   return {
     authedUser,
+    userProfile
   };
 }
 export default connect(mapStateToProps, { handleInitialData })(App);

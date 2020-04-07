@@ -1,16 +1,21 @@
-import { getInitialData, saveQuestionAnswer, saveQuestion } from "../utils/api";
-import { addUserAnswer, addUserQuestion, getUsers } from "./users";
+import {
+  getInitialData,
+  saveQuestionAnswer,
+  saveQuestion,
+  saveUser,
+} from "../utils/api";
+import { addUserAnswer, addUserQuestion, getUsers, addUser } from "./users";
 import { getQuestions, addQuestion, saveAnswer } from "./questions";
 import { setAuthUser } from "./authUser";
 
-const AUTH_ID = "tylermcginnis";
+
 
 export function handleInitialData() {
   return (dispatch) => {
     return getInitialData().then(({ users, questions }) => {
       dispatch(getUsers(users));
       dispatch(getQuestions(questions));
-      dispatch(setAuthUser(AUTH_ID));
+      
     });
   };
 }
@@ -31,12 +36,26 @@ export function handleSaveQuestion(option1, option2) {
   return (dispatch, getState) => {
     const { authedUser } = getState();
     return saveQuestion({
-      option1,
-      option2,
+      optionOneText: option1,
+      optionTwoText: option2,
       author: authedUser,
     }).then((question) => {
       dispatch(addQuestion(question));
       dispatch(addUserQuestion(question));
     });
+  };
+}
+
+export function handleNewUser(name, image) {
+  return (dispatch) => {
+    return saveUser({
+      name,
+      image,
+    })
+      .then((user) => {
+        dispatch(addUser(user));
+        dispatch(setAuthUser(user.id));
+      })
+      .catch((err) => console.warn("Error creating user: ", err));
   };
 }

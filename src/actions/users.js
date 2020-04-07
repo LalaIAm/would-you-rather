@@ -1,6 +1,7 @@
 export const GET_USERS = 'GET_USERS';
 export const ADD_USER_QUESTION = 'ADD_USER_QUESTION';
 export const ADD_USER_ANSWER = 'ADD_USER_ANSWER';
+export const ADD_USER = 'ADD_USER';
 
 export function getUsers(users) {
   return {
@@ -9,11 +10,10 @@ export function getUsers(users) {
   }
 }
 
-export function addUserQuestion(authedUser, qid) {
+export function addUserQuestion(question) {
   return {
     type: ADD_USER_QUESTION,
-    authedUser,
-    qid
+    question
   }
 }
 
@@ -23,5 +23,13 @@ export function addUserAnswer(authedUser, qid, option) {
     authedUser,
     qid,
     option
+  }
+}
+
+export function addUser(user) {
+  console.log('the new user is: ', user)
+  return {
+    type: ADD_USER,
+    user
   }
 }

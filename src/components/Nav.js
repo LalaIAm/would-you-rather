@@ -1,8 +1,16 @@
 import React from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
-import { Drawer, Button, List, ListItem, ListItemText } from "@material-ui/core";
-
+import {
+  Drawer,
+  Button,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemIcon
+} from "@material-ui/core";
+import { Link as RouterLink } from 'react-router-dom';
+import PropTypes from "prop-types";
 
 const useStyles = makeStyles({
   list: {
@@ -12,6 +20,33 @@ const useStyles = makeStyles({
     width: "auto",
   },
 });
+
+const ListItemLink = (props) => {
+  const { icon, primary, to } = props;
+
+  const renderLink = React.useMemo(
+    () =>
+      React.forwardRef((itemProps, ref) => (
+        <RouterLink to={to} ref={ref} {...itemProps} />
+      )),
+    [to]
+  );
+
+  return (
+    <li>
+      <ListItem button component={renderLink}>
+        {icon ? <ListItemIcon>{icon}</ListItemIcon> : null}
+        <ListItemText primary={primary} />
+      </ListItem>
+    </li>
+  );
+};
+
+ListItemLink.propTypes = {
+  icon: PropTypes.element,
+  primary: PropTypes.string.isRequired,
+  to: PropTypes.string.isRequired,
+};
 
 const Nav = () => {
   const classes = useStyles();
@@ -39,25 +74,23 @@ const Nav = () => {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        <ListItem button>
-          <ListItemText primary='Would You Rather?' />
-        </ListItem>
-        <ListItem button>
-          <ListItemText primary='Create New Poll' />
-        </ListItem>
-        <ListItem button>
-          <ListItemText primary='Scoreboard' />
-        </ListItem>
-        <ListItem>
-          <ListItemText primary='My Stats' />
-        </ListItem>
+        <ListItemLink to='/' primary='Would You Rather' />
+        <ListItemLink to='/add' primary='Make New Poll' />
+        <ListItemLink to='/leaderboard' primary='Leaderboard' />
+      
       </List>
     </div>
   );
 
   return (
     <div>
-      <Button color='secondary' variant='contained' onClick={toggleDrawer("left", true)}>Menu</Button>
+      <Button
+        color='secondary'
+        variant='contained'
+        onClick={toggleDrawer("left", true)}
+      >
+        Menu
+      </Button>
       <Drawer
         anchor='left'
         open={state["left"]}
