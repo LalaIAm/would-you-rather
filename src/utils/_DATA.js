@@ -5,6 +5,8 @@ const user4 = require("../images/user4.png");
 const user5 = require("../images/user5.png");
 const user6 = require("../images/user6.png");
 
+export { user3, user1, user2, user4, user5, user6}
+
 
 let users = {
   sarahedo: {

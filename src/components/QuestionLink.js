@@ -24,7 +24,7 @@ const QuestionLink = (props) => {
   
 
   return (
-    <Link to={`/question/${id}`}>
+    <Link to={`/questions/${id}`}>
       <Card className={classes.card}>
       
         <CardContent>

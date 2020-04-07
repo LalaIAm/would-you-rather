@@ -62,9 +62,9 @@ const QuestionContainer = (props) => {
   };
 
   const { questions, users, authedUser, dispatch } = props;
-  const { id } = props.match.params;
+  const id = props.match.params.id
   const question = questions[id]
-  const authorProfile = users[question.author]
+  
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -83,6 +83,7 @@ const QuestionContainer = (props) => {
   if (!question) {
     return <NotFound />
   }
+  const authorProfile = users[question.author];
 
   if (
     question.optionOne.votes.includes(authedUser) ||

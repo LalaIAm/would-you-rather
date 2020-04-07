@@ -30,7 +30,7 @@ class App extends Component {
               {!authedUser && <Route to='/login' component={Login} />}
 
               <Route path='/' exact component={Dashboard} />
-              <Route path='/question/:id' component={QuestionContainer} />
+              <Route path='/questions/:id' component={QuestionContainer} />
               <Route path='/add' component={NewQuestion} />
               <Route path='/leaderboard' component={LeaderBoard} />
               <Route component={NotFound} />

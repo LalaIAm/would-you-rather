@@ -1,11 +1,6 @@
 import { createMuiTheme } from "@material-ui/core/styles";
 
 const theme = createMuiTheme({
-  overrides: {
-    MuiCard: {
-      zIndex: 0,
-    },
-  },
   palette: {
     primary: {
       main: "#c21858",
