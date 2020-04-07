@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import UserCard from "./UserCard";
 
@@ -24,7 +23,7 @@ const LeaderBoard = (props) => {
     <div className={classes.container}>
       <div className={classes.list}>
         {scores.map((user, index) => {
-          return <UserCard id={user.id} user={user} rank={index} />;
+          return <UserCard key={user.id} id={user.id} user={user} rank={index} />;
         })}
       </div>
     </div>

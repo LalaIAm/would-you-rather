@@ -10,7 +10,6 @@ import {
   Button,
 } from "@material-ui/core";
 import { setAuthUser } from "../actions/authUser";
-import { Redirect } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import NewUserForm from './NewUserForm';
 
@@ -69,7 +68,7 @@ const Login = (props) => {
     }
   };
 
-  const { userArray, authedUser } = props;
+  const { userArray} = props;
 
   return (
     <div className={classes.container}>
@@ -114,7 +113,7 @@ const Login = (props) => {
   );
 };
 
-function mapStateToProps({ users, authedUser }) {
+function mapStateToProps({ users }) {
   const userOptions = Object.keys(users).map((user) => {
     return {
       key: users[user].id,
@@ -126,7 +125,7 @@ function mapStateToProps({ users, authedUser }) {
 
   return {
     userArray: userOptions,
-    authedUser,
+    
   };
 }
 

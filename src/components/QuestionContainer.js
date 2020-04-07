@@ -8,14 +8,12 @@ import {
   CardContent,
   Fab,
   CardActions,
-  IconButton,
   Button,
   Avatar
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 import { handleAnswer } from "../actions/shared";
-import StarsTwoToneIcon from "@material-ui/icons/StarsTwoTone";
 import CheckCircleTwoToneIcon from "@material-ui/icons/CheckCircleTwoTone";
 
 const useStyles = makeStyles((theme) => ({

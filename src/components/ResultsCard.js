@@ -1,21 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Card,
   Typography,
   Paper,
   Grid,
   CardContent,
-  Fab,
-  CardActions,
-  IconButton,
   Button,
   Avatar,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
-import { handleAnswer } from "../actions/shared";
-import StarsTwoToneIcon from "@material-ui/icons/StarsTwoTone";
-import CheckCircleTwoToneIcon from "@material-ui/icons/CheckCircleTwoTone";
 import { Link as RouterLink } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -58,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
 const ResultsCard = (props) => {
   const classes = useStyles();
 
-  const { id, question, authedUser, authorProfile, dispatch } = props;
+  const { question, authedUser, authorProfile} = props;
 
   if (question === null) {
     return <p>This question does not exist</p>;

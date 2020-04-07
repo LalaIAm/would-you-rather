@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { Grid, Switch, Typography, Link } from "@material-ui/core";
+import { Grid, Switch, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import QuestionContainer from "./QuestionContainer";
 import { connect } from "react-redux";
 import QuestionLink from "./QuestionLink";
 
@@ -23,7 +22,6 @@ const Dashboard = (props) => {
     setQuestions(isQuestions);
   };
 
-  const { questionIds, authedUser, questions } = props;
 
   const renderList = () => {
     if (questionsSet) {

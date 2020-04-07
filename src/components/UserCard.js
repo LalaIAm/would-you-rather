@@ -24,11 +24,8 @@ const useStyles = makeStyles({
 const UserCard = (props) => {
   const classes = useStyles();
   const {
-    id,
     name,
     avatarURL,
-    answers,
-    questions,
     questionsAsked,
     questionsAnswered,
     total,

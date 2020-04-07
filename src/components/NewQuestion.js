@@ -45,7 +45,7 @@ const NewQuestion = (props) => {
 
   const classes = useStyles();
 
-  const { authUser, addQuestion } = props;
+  const { addQuestion } = props;
 
   const handleSubmit = (event) => {
     event.preventDefault();

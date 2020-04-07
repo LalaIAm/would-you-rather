@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { Card, CardContent, Typography, Avatar } from "@material-ui/core";
+import { Card, CardContent, Typography} from "@material-ui/core";
 import { connect } from "react-redux";
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -12,7 +12,7 @@ const useStyles = makeStyles({
 
 const QuestionLink = (props) => {
   const classes = useStyles()
-  const { id, answered, authedUser, question, users, questionsList } = props;
+  const { id, answered,  question, questionsList } = props;
 
 
   if (questionsList === 'questions' && answered) {

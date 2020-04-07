@@ -7,11 +7,9 @@ import {
   List,
   ListItem,
   ListItemText,
-  Link,
   ListItemIcon
 } from "@material-ui/core";
-import { Link as RouterLink } from "react-router-dom";
-import { Route, MemoryRouter } from "react-router";
+import { Link as RouterLink } from 'react-router-dom';
 import PropTypes from "prop-types";
 
 const useStyles = makeStyles({
