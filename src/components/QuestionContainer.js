@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ResultsCard from './ResultsCard';
+import ResultsCard from "./ResultsCard";
 import {
   Card,
   Typography,
@@ -9,7 +9,7 @@ import {
   Fab,
   CardActions,
   Button,
-  Avatar
+  Avatar,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   container: {
     padding: theme.spacing(3),
     marginTop: theme.spacing(2),
-    height: '80vh'
+    height: "80vh",
   },
   actions: {
     textAlign: "center",
@@ -37,8 +37,8 @@ const useStyles = makeStyles((theme) => ({
     color: "secondary",
   },
   avatar: {
-    margin: 'auto'
-  }
+    margin: "auto",
+  },
 }));
 
 const QuestionContainer = (props) => {
@@ -46,6 +46,8 @@ const QuestionContainer = (props) => {
   const [selection, setSelection] = useState("");
   const [colorOne, setColorOne] = useState("primary");
   const [colorTwo, setColorTwo] = useState("primary");
+
+
 
   const toggleSelection = (option) => {
     setSelection(option);
@@ -58,13 +60,15 @@ const QuestionContainer = (props) => {
     }
   };
 
-  const { id, question, authedUser, authorProfile, dispatch } = props;
+  const { questions, users, authedUser, dispatch } = props;
+  const { id } = props.match.params;
+  const question = questions[id]
+  const authorProfile = users[question.author]
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const answer = selection;
-    dispatch(handleAnswer(id, answer))
-    
+    dispatch(handleAnswer(id, answer));
   };
 
   if (question === null) {
@@ -72,20 +76,23 @@ const QuestionContainer = (props) => {
   }
 
   const goHome = () => {
-    props.history.push('/')
-  }
+    props.history.push("/");
+  };
 
   if (
     question.optionOne.votes.includes(authedUser) ||
     question.optionTwo.votes.includes(authedUser)
   ) {
-    return <ResultsCard authorProfile={authorProfile} id={id} />
+    return <ResultsCard authorProfile={authorProfile} id={id} />;
   }
 
   return (
-    
     <Paper className={classes.container}>
-      <Avatar alt={authorProfile.name} src={authorProfile.avatarURL} className={classes.avatar} />
+      <Avatar
+        alt={authorProfile.name}
+        src={authorProfile.avatarURL}
+        className={classes.avatar}
+      />
       <Typography align='center' variant='body2'>
         {authorProfile.name} asks
       </Typography>
@@ -153,18 +160,13 @@ const QuestionContainer = (props) => {
 };
 
 function mapStateToProps({ authedUser, users, questions }, { match }) {
-  const { id } = match.params;
-  const question = questions[id];
-  const authorProfile = users[question.author]
 
   return {
     authedUser,
-    question,
-    id, 
-    authorProfile
+    questions,
+    users
+    
   };
 }
-
-
 
 export default connect(mapStateToProps)(QuestionContainer);
