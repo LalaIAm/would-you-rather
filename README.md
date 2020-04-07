@@ -1,72 +1,40 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+WouldYouRather Version 1.0 04/07/2020
 
-After downloading, run npm install or yarn in the root directory to install all project dependencies. Running npm start or yarn start will start the app. The app will open on a the login page. Either select an existing user or create your own user profile in order to play the game.
+# Would You Rather?
 
-The user menu is accessible by clicking the menu button on the top. Here you will find methods for creating your own polls, as well as the leaderboard for the game.
+> A react game that was built with redux.
 
-## Available Scripts
+Would you rather is a game designed to let you poll your friends with the choice between two options. Which would you rather do?
 
-In the project directory, you can run:
+## Table of Contents
 
-### `npm start`
+- [Installation](#installation)
+- [Usage](#usage)
+- [Support](#support)
+- [Contributing](#contributing)
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Installation
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+To get started, first download the app then run npm install or yarn from the app's root folder. After the dependencies are installed, from the root folder, run npm start. The app will open bringing you to the login screen.
 
-### `npm test`
+## Usage
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+At login, you may either choose from an existing profile or create your own. However, you must be logged in to access the app. 
 
-### `npm run build`
+After logging in, you will find yourself on the dashboard screen. From here, you may either select a question to answer or review the answers to questions you have already answered. 
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Creating new polls
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+If you would like to create new polls, begin by clicking the menu button at the top of the screen. From there, you will have the option to create new polls.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### The Leaderboard
 
-### `npm run eject`
+The menu can also take you to the leaderboard. The leaderboard displays data from each user about how many questions they've asked and answered, with the user with the most total questions and answers as the leader.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Support
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Please [open an issue](https://github.com/LalaIAm/would-you-rather/issues/new) for support.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Contributing
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Please contribute using [Github Flow](https://guides.github.com/introduction/flow). Create a branch, add commits, and [open a pull request](https://github.com/LalaIAm/would-you-rather/compare/).

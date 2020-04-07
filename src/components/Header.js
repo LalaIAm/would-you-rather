@@ -1,7 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { AppBar, Toolbar, Typography, Avatar } from "@material-ui/core";
-import { connect } from 'react-redux';
+import { AppBar, Toolbar, Typography, Avatar, Button } from "@material-ui/core";
+import { connect } from "react-redux";
 import Nav from "./Nav";
 import { logoutAuthUser } from "../actions/authUser";
 
@@ -17,13 +17,13 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(4),
   },
   profile: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center'
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
   name: {
-    marginRight: '.5rem'
-  }
+    marginRight: ".5rem",
+  },
 }));
 
 const Header = (props) => {
@@ -39,12 +39,19 @@ const Header = (props) => {
             Would You Rather?
           </Typography>
           {profile && (
-            <div onClick={(event) => logout()} className={classes.profile}>
-              
-                <Typography className={classes.name} variant='body1'>{profile.name}</Typography>
-                
+            <div className={classes.profile}>
+              <Typography className={classes.name} variant='body1'>
+                {profile.name}
+              </Typography>
+
               <Avatar src={profile.avatarURL} />
-              <Typography>LogOut</Typography>
+              <Button
+                variant='contained'
+                color='secondary'
+                onClick={(event) => logout()}
+              >
+                Log Out
+              </Button>
             </div>
           )}
         </Toolbar>
@@ -53,7 +60,7 @@ const Header = (props) => {
   );
 };
 
-function mapStateToProps({ authedUser, users }, {user, profile }) {
+function mapStateToProps({ authedUser, users }, { user, profile }) {
   return {
     user,
     authedUser,
@@ -64,10 +71,9 @@ function mapStateToProps({ authedUser, users }, {user, profile }) {
 function mapDispatchToProps(dispatch) {
   return {
     logout: () => {
-      dispatch(logoutAuthUser())
-    }
-  }
-  
+      dispatch(logoutAuthUser());
+    },
+  };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
