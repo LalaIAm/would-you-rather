@@ -1,5 +1,9 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+After downloading, run npm install or yarn in the root directory to install all project dependencies. Running npm start or yarn start will start the app. The app will open on a the login page. Either select an existing user or create your own user profile in order to play the game.
+
+The user menu is accessible by clicking the menu button on the top. Here you will find methods for creating your own polls, as well as the leaderboard for the game.
+
 ## Available Scripts
 
 In the project directory, you can run:
