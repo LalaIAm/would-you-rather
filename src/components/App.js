@@ -10,6 +10,7 @@ import Header from "./Header";
 import QuestionContainer from "./QuestionContainer";
 import NewQuestion from "./NewQuestion";
 import LeaderBoard from "./LeaderBoard";
+import Login from './Login';
 
 
 class App extends Component {
@@ -18,13 +19,15 @@ class App extends Component {
   }
 
   render() {
-    const { authedUser } = this.props;
+    const { authedUser, userProfile } = this.props;
     return (
       <ThemeProvider theme={theme}>
         <Router>
+          <Header user={authedUser} profile={userProfile} />
           <div className='App'>
-            <Header user={authedUser} />
             <Switch>
+              {!authedUser && <Route to='/login' component={Login} />}
+
               <Route path='/' exact component={Dashboard} />
               <Route path='/question/:id' component={QuestionContainer} />
               <Route path='/add' component={NewQuestion} />
@@ -37,9 +40,11 @@ class App extends Component {
   }
 }
 
-function mapStateToProps({ authedUser }) {
+function mapStateToProps({ authedUser, users }) {
+  const userProfile = users[authedUser]
   return {
     authedUser,
+    userProfile
   };
 }
 export default connect(mapStateToProps, { handleInitialData })(App);

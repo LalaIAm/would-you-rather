@@ -23,6 +23,6 @@ export function saveQuestionAnswer(authedUser, qid, answer) {
   return _saveQuestionAnswer({ authedUser, qid, answer });
 }
 
-export function saveUser(username, id, imageURL) {
-    return _saveUser({username, id, imageURL});
+export function saveUser(newUser) {
+    return _saveUser(newUser);
 }

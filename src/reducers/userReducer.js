@@ -34,12 +34,10 @@ export default function users(state = {}, action) {
         },
       };
     case ADD_USER:
-      const { username, uid, image } = action;
+      const { user } = action;
       return {
         ...state,
-        username,
-        uid,
-        image
+        [user.id]: user
       }
     default:
       return state;

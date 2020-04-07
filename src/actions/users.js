@@ -26,11 +26,10 @@ export function addUserAnswer(authedUser, qid, option) {
   }
 }
 
-export function addUser(name, uid, image) {
+export function addUser(user) {
+  console.log('the new user is: ', user)
   return {
     type: ADD_USER,
-    name,
-    uid,
-    image
+    user
   }
 }

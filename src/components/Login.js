@@ -73,7 +73,7 @@ const Login = (props) => {
 
   return (
     <div className={classes.container}>
-      <NewUserForm />
+      
       <Paper className={classes.paper}>
         <Typography className={classes.formTitle} variant='h2'>
           Choose Your Avatar
@@ -107,6 +107,8 @@ const Login = (props) => {
             Submit
           </Button>
         </form>
+        <Typography>OR</Typography>
+        <NewUserForm />
       </Paper>
     </div>
   );

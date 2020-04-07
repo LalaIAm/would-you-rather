@@ -34,31 +34,26 @@ const useStyles = makeStyles({
 });
 
 const NewUserForm = (props) => {
-  const [username, setUsername] = useState("");
   const [name, setName] = useState("");
-  const [avatar, setAvatar] = useState("");
+
+  const [image, setImage] = useState("");
 
   const classes = useStyles();
 
   const handleChange = (event) => {
     let newName = event.target.value;
     setName(newName);
-    newName = newName.toLowerCase().trim();
-    if (newName.includes(" ")) {
-      newName = newName.split(" ").join("");
-    }
-    setUsername(newName);
   };
 
   const handleAvatarChange = (event) => {
-    setAvatar(event.target.value);
-    };
-    
-    const { createUser } = props;
+    setImage(event.target.value);
+  };
+
+  const { createUser } = props;
 
   const handleSubmit = (event) => {
-      event.preventDefault();
-      createUser(name, username, avatar)
+    event.preventDefault();
+    createUser(name, image);
   };
   return (
     <div>
@@ -78,48 +73,52 @@ const NewUserForm = (props) => {
             <RadioGroup
               onChange={handleAvatarChange}
               row
-              value={avatar}
+              value={image}
               name='avatar'
             >
               <FormControlLabel
-                value='user1'
+                value={avatars.user1}
                 control={<Radio color='secondary' />}
                 label={<Avatar src={avatars.user1} />}
                 labelPlacement='bottom'
               />
               <FormControlLabel
-                value='user2'
+                value={avatars.user2}
                 control={<Radio color='secondary' />}
                 label={<Avatar src={avatars.user2} />}
                 labelPlacement='bottom'
               />
               <FormControlLabel
-                value='user3'
+                value={avatars.user3}
                 control={<Radio color='secondary' />}
                 label={<Avatar src={avatars.user3} />}
                 labelPlacement='bottom'
               />
               <FormControlLabel
-                value='user4'
+                value={avatars.user4}
                 control={<Radio color='secondary' />}
                 label={<Avatar src={avatars.user4} />}
                 labelPlacement='bottom'
               />
               <FormControlLabel
-                value='user5'
+                value={avatars.user5}
                 control={<Radio color='secondary' />}
                 label={<Avatar src={avatars.user5} />}
                 labelPlacement='bottom'
               />
               <FormControlLabel
-                value='user6'
+                value={avatars.user6}
                 control={<Radio color='secondary' />}
                 label={<Avatar src={avatars.user6} />}
                 labelPlacement='bottom'
               />
             </RadioGroup>
           </FormControl>
-          <Button onClick={(event) => handleSubmit(event)} color='primary' variant='contained'>
+          <Button
+            onClick={(event) => handleSubmit(event)}
+            color='primary'
+            variant='contained'
+          >
             Submit
           </Button>
         </form>
@@ -128,12 +127,16 @@ const NewUserForm = (props) => {
   );
 };
 
-function mapStateToProps({}) {}
-
-function mapDispatchToProps({ dispatch }) {
+function mapStateToProps({ users }) {
   return {
-    createUser: (name, uid, image) => {
-      dispatch(handleNewUser(name, uid, image));
+    users,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    createUser: (name, image) => {
+      dispatch(handleNewUser(name, image));
     },
   };
 }

@@ -4,18 +4,18 @@ import {
   saveQuestion,
   saveUser,
 } from "../utils/api";
-import { addUserAnswer, addUserQuestion, getUsers } from "./users";
+import { addUserAnswer, addUserQuestion, getUsers, addUser } from "./users";
 import { getQuestions, addQuestion, saveAnswer } from "./questions";
 import { setAuthUser } from "./authUser";
 
-const AUTH_ID = "tylermcginnis";
+
 
 export function handleInitialData() {
   return (dispatch) => {
     return getInitialData().then(({ users, questions }) => {
       dispatch(getUsers(users));
       dispatch(getQuestions(questions));
-      dispatch(setAuthUser(AUTH_ID));
+      
     });
   };
 }
@@ -46,15 +46,15 @@ export function handleSaveQuestion(option1, option2) {
   };
 }
 
-export function handleNewUser(name, uid, image) {
+export function handleNewUser(name, image) {
   return (dispatch) => {
     return saveUser({
       name,
-      uid,
-      avatarURL: image,
+      image,
     })
       .then((user) => {
-        dispatch(setAuthUser(user));
+        dispatch(addUser(user));
+        dispatch(setAuthUser(user.id));
       })
       .catch((err) => console.warn("Error creating user: ", err));
   };
