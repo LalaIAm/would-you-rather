@@ -15,6 +15,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 import { handleAnswer } from "../actions/shared";
 import CheckCircleTwoToneIcon from "@material-ui/icons/CheckCircleTwoTone";
+import NotFound from "./NotFound";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -78,6 +79,10 @@ const QuestionContainer = (props) => {
   const goHome = () => {
     props.history.push("/");
   };
+
+  if (!question) {
+    return <NotFound />
+  }
 
   if (
     question.optionOne.votes.includes(authedUser) ||

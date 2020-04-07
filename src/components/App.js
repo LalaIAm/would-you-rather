@@ -11,7 +11,7 @@ import QuestionContainer from "./QuestionContainer";
 import NewQuestion from "./NewQuestion";
 import LeaderBoard from "./LeaderBoard";
 import Login from './Login';
-import NotFound from "./404";
+import NotFound from "./NotFound";
 
 
 class App extends Component {
