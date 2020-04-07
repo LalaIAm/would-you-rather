@@ -2,9 +2,16 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Card, CardContent, Typography, Avatar } from "@material-ui/core";
 import { connect } from "react-redux";
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles({
+  card: {
+    margin: '1rem'
+  }
+})
 
 const QuestionLink = (props) => {
-  
+  const classes = useStyles()
   const { id, answered, authedUser, question, users, questionsList } = props;
 
 
@@ -18,15 +25,10 @@ const QuestionLink = (props) => {
 
   return (
     <Link to={`/question/${id}`}>
-      <Card>
-        {answered && (
-          <p>answered</p>
-        )}
-        {!answered && (
-          <p>No answe</p>
-        )}
+      <Card className={classes.card}>
+      
         <CardContent>
-          <Typography variant='h4'>{question.optionOne.text}</Typography>
+          <Typography className={classes.link} variant='h4'>{question.optionOne.text}</Typography>
         </CardContent>
       </Card>
     </Link>

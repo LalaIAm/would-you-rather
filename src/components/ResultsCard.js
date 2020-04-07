@@ -45,6 +45,14 @@ const useStyles = makeStyles((theme) => ({
   avatar: {
     margin: "auto",
   },
+  result: {
+    backgroundColor: "#c21858",
+    margin: '.5rem',
+    borderRadius: '50%',
+    padding: '1.5rem',
+    color: 'white',
+    boxShadow: '3px 4px 8px rgba(20, 20, 20, 0.4),v5px 8px 10px rgba(20, 20, 20, 0.2)',
+  },
 }));
 
 const ResultsCard = (props) => {
@@ -117,7 +125,9 @@ const ResultsCard = (props) => {
             </Card>
           </Grid>
           <Grid item>
-            <div className='orBadge'>Results</div>
+            <div className={classes.result}>
+              <Typography>RESULT</Typography>
+            </div>
           </Grid>
           <Grid item>
             <Card className={classes.questionCard}>

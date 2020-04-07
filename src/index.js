@@ -7,7 +7,12 @@ import { createStore } from "redux";
 import middleware from "./middleware";
 import reducer from "./reducers";
 import { Provider } from "react-redux";
-import {composeWithDevTools} from 'redux-devtools-extension'
+import { composeWithDevTools } from 'redux-devtools-extension'
+import LogRocket from 'logrocket';
+import setupLogRocketReact from "logrocket-react";
+
+LogRocket.init("olx7ro/would-you-rather-7hxcy");
+setupLogRocketReact(LogRocket);
 
 const store = createStore(reducer, composeWithDevTools(middleware));
 

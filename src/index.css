@@ -15,6 +15,10 @@ body {
   align-items: center;
 }
 
+.dashboard-list {
+  list-style: none;
+}
+
 .orBadge {
   background-color: #c21858;
   color: white;

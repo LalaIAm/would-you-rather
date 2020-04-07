@@ -11,6 +11,7 @@ import QuestionContainer from "./QuestionContainer";
 import NewQuestion from "./NewQuestion";
 import LeaderBoard from "./LeaderBoard";
 import Login from './Login';
+import NotFound from "./404";
 
 
 class App extends Component {
@@ -32,6 +33,7 @@ class App extends Component {
               <Route path='/question/:id' component={QuestionContainer} />
               <Route path='/add' component={NewQuestion} />
               <Route path='/leaderboard' component={LeaderBoard} />
+              <Route component={NotFound} />
             </Switch>
           </div>
         </Router>
